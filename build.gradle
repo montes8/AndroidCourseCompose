@@ -7,4 +7,16 @@ plugins {
     id 'com.android.application' version '7.4.1' apply false
     id 'com.android.library' version '7.4.1' apply false
     id 'org.jetbrains.kotlin.android' version '1.7.0' apply false
+    id 'com.google.dagger.hilt.android' version '2.44' apply false
+    id "org.sonarqube" version "3.4.0.2513"
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "AndroidCourseCompose"
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
