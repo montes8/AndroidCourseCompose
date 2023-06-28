@@ -1,4 +1,4 @@
-package com.gb.vale.androidcoursecompose
+package com.gb.vale.androidcoursecompose.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
