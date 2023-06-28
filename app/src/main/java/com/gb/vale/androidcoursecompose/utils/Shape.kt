@@ -1,4 +1,4 @@
-package com.gb.vale.androidcoursecompose.ui.theme
+package com.gb.vale.androidcoursecompose.utils
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
