@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -27,13 +28,17 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.gb.vale.androidcoursecompose.R
 import com.gb.vale.androidcoursecompose.component.Screen
-import com.gb.vale.androidcoursecompose.ui.init.splash.InitUiEvent
-import com.gb.vale.androidcoursecompose.ui.init.splash.SplashViewModel
+import com.gb.vale.androidcoursecompose.component.toast
+import com.gb.vale.androidcoursecompose.ui.home.HomeActivity
+import com.gb.vale.androidcoursecompose.ui.init.InitUiEvent
+import com.gb.vale.androidcoursecompose.ui.init.AppViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun ScreenLogin(viewModel: SplashViewModel, navController: NavController) {
+fun ScreenLogin(viewModel: AppViewModel, navController: NavController) {
+
+    val context = LocalContext.current
 
     var text by remember { mutableStateOf("") }
     var textPass by remember { mutableStateOf("") }
@@ -46,19 +51,20 @@ fun ScreenLogin(viewModel: SplashViewModel, navController: NavController) {
         viewModel.eventFlow.collectLatest { event ->
             when (event) {
                 is InitUiEvent.NavigateToRegister -> {
-                    navController.navigate(Screen.LoginScreen.route)
-                }
-                is InitUiEvent.NavigateToLogin -> {
-                    navController.navigate(Screen.LoginScreen.route)
+                    navController.navigate(Screen.RegisterScreen.route)
                 }
                 is InitUiEvent.NavigateToHome -> {
-                    navController.navigate(Screen.LoginScreen.route)
+                    if (event.success)HomeActivity.newInstance(context)
                 }
                 else -> {}
             }
         }
     }
 
+    if (viewModel.uiToast) {
+        context.toast("Usuario incorrecto")
+        viewModel.uiToast = false
+    }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -139,7 +145,7 @@ fun ScreenLogin(viewModel: SplashViewModel, navController: NavController) {
             Text(text = "Iniciar sesión", color = Color.White)
         }
 
-        Text(modifier = Modifier.padding(top = 32.dp).clickable { viewModel.register()},
+        Text(modifier = Modifier.padding(top = 32.dp).clickable { viewModel.nextRegister()},
             text = "Crear cuenta", color = Color.Blue,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,

@@ -22,12 +22,14 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.gb.vale.androidcoursecompose.R
 import com.gb.vale.androidcoursecompose.component.Screen
+import com.gb.vale.androidcoursecompose.ui.init.AppViewModel
+import com.gb.vale.androidcoursecompose.ui.init.InitUiEvent
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun ScreenSplash(viewModel: SplashViewModel,navController: NavController){
+fun ScreenSplash(viewModel: AppViewModel, navController: NavController){
 
-    val context = LocalContext.current
+
     viewModel.loadValidateLogin()
 
     LaunchedEffect(key1 = true) {
