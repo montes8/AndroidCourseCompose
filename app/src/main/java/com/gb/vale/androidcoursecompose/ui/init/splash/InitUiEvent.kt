@@ -6,5 +6,6 @@ sealed class InitUiEvent {
 
     object NavigateToHome : InitUiEvent()
 
+    class NavigateToLogin(user : String , pass : String) : InitUiEvent()
     object NavigateToRegister : InitUiEvent()
 }

@@ -26,4 +26,22 @@ class SplashViewModel @Inject constructor(
         }
     }
 
+    fun nextHome(){
+        execute {
+            _eventFlow.emit(InitUiEvent.NavigateToHome)
+        }
+    }
+
+    fun login(user :String , pass : String){
+        execute {
+            _eventFlow.emit(InitUiEvent.NavigateToLogin(user,pass))
+        }
+    }
+
+    fun register(){
+        execute {
+            _eventFlow.emit(InitUiEvent.NavigateToRegister)
+        }
+    }
+
 }
