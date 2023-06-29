@@ -1,6 +1,8 @@
-package com.gb.vale.androidcoursecompose.ui
+package com.gb.vale.androidcoursecompose.ui.init
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -22,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gb.vale.androidcoursecompose.R
+import com.gb.vale.androidcoursecompose.ui.home.HomeActivity
 import com.gb.vale.androidcoursecompose.utils.AndroidCourseComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -30,6 +33,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AndroidCourseComposeTheme {
                 ScreenSplash()
+                Handler(Looper.getMainLooper()).postDelayed({HomeActivity.newIntance(this)},2000)
             }
         }
     }

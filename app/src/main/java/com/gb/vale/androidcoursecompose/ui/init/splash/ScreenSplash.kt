@@ -1,2 +1,2 @@
-package com.gb.vale.androidcoursecompose.ui.splash
+package com.gb.vale.androidcoursecompose.ui.init.splash
 
