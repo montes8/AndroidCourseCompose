@@ -28,6 +28,7 @@ fun ScreenSplash(viewModel: SplashViewModel){
 
     val context = LocalContext.current
     viewModel.loadValidateLogin()
+
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
             when (event) {

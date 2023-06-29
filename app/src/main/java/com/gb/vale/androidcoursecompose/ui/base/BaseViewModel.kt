@@ -15,7 +15,6 @@ open class BaseViewModel( @IoDispatcher
     fun execute(loading: Boolean = true,func:suspend ()->Unit){
         viewModelScope.launch(ioDispatcher){
             try {
-                delay(3000)
                 func()
             }catch (ex:Exception){
             }
