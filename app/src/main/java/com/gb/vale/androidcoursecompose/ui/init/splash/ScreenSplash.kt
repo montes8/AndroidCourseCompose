@@ -19,12 +19,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.gb.vale.androidcoursecompose.R
-import com.gb.vale.androidcoursecompose.ui.home.HomeActivity
+import com.gb.vale.androidcoursecompose.component.Screen
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun ScreenSplash(viewModel: SplashViewModel){
+fun ScreenSplash(viewModel: SplashViewModel,navController: NavController){
 
     val context = LocalContext.current
     viewModel.loadValidateLogin()
@@ -32,7 +33,9 @@ fun ScreenSplash(viewModel: SplashViewModel){
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
             when (event) {
-                is SplashUiEvent.NavigateToNext -> { HomeActivity.newInstance(context) }
+                is InitUiEvent.NavigateToNext -> {
+                    navController.navigate(Screen.LoginScreen.route)
+                }
                 else ->  {} } }
     }
 

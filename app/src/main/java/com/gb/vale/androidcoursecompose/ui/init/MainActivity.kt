@@ -5,8 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.gb.vale.androidcoursecompose.ui.init.splash.ScreenSplash
+import com.gb.vale.androidcoursecompose.component.navigation.Navigation
 import com.gb.vale.androidcoursecompose.utils.AndroidCourseComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,7 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AndroidCourseComposeTheme {
-                ScreenSplash(hiltViewModel())
+                Navigation()
             }
         }
     }
@@ -29,6 +28,5 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     AndroidCourseComposeTheme {
-        ScreenSplash(hiltViewModel())
     }
 }
