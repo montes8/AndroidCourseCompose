@@ -1,11 +1,11 @@
 package com.gb.vale.androidcoursecompose.repository.network
 
-import com.gb.vale.androidcoursecompose.repository.network.response.MovieResponse
+import com.gb.vale.androidcoursecompose.repository.network.response.RecipeResponse
 import retrofit2.Response
 import retrofit2.http.GET
 
 interface ACMService {
-    @GET("api/user/loadMovi")
-     suspend fun loadMovie(): Response<MovieResponse>
+    @GET("api/user/loadRecipes")
+    suspend fun loadRecipes(): Response<List<RecipeResponse>>
 
 }

@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.gb.vale.androidcoursecompose.R
 import com.gb.vale.androidcoursecompose.component.Screen
 import com.gb.vale.androidcoursecompose.ui.init.AppViewModel
@@ -27,7 +28,7 @@ import com.gb.vale.androidcoursecompose.ui.init.InitUiEvent
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun ScreenSplash(viewModel: AppViewModel, navController: NavController){
+fun ScreenSplash(viewModel: AppViewModel, navController: NavController  = rememberNavController()){
 
 
     viewModel.loadValidateLogin()

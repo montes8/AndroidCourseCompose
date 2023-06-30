@@ -1,9 +1,9 @@
 package com.gb.vale.androidcoursecompose.usecases.repository.network
 
-import com.gb.vale.androidcoursecompose.model.MovieModel
+import com.gb.vale.androidcoursecompose.model.RecipeModel
 
 
 interface IDataNetwork {
-     suspend fun loadMovie( ): MovieModel
+     suspend fun loadRecipes( ): List<RecipeModel>
 
 }
