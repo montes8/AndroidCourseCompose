@@ -6,17 +6,21 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -41,9 +45,26 @@ class HomeActivity : ComponentActivity() {
         setContent {
             AndroidCourseComposeTheme {
                 Box{
-                    Column( modifier = Modifier.padding(20.dp)){
+                    Column( modifier = Modifier.padding(top = 20.dp,
+                    start = 20.dp, end = 20.dp )){
                         ListInitialRecipes(viewModel)
                     }
+
+                    if (viewModel.uiStateLoading){
+                        Column(
+                            modifier = Modifier.fillMaxSize(),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            CircularProgressIndicator(
+                                modifier = Modifier
+                                    .background(Color.Transparent)
+                                    .wrapContentSize(),
+                                color = Color.Magenta
+                            )
+                        }
+                    }
+
                 }
             }
         }
@@ -58,7 +79,7 @@ fun ListInitialRecipes(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        if (viewModel.uiState.recipes.isNotEmpty()) {
+        if (viewModel.uiStateListRecipes.isNotEmpty()) {
 
             Text(
                 text =  "Lista de recetas",
@@ -73,7 +94,7 @@ fun ListInitialRecipes(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
-                items(viewModel.uiState.recipes) { recipe ->
+                items(viewModel.uiStateListRecipes) { recipe ->
                     RecipesItem(
                         recipe = recipe,
                         openNewChatAction = {

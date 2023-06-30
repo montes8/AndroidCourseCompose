@@ -3,14 +3,13 @@ package com.gb.vale.androidcoursecompose.ui.home
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.gb.vale.androidcoursecompose.model.RecipeModel
 import com.gb.vale.androidcoursecompose.ui.base.BaseViewModel
-import com.gb.vale.androidcoursecompose.usecases.AppUseCase
 import com.gb.vale.androidcoursecompose.usecases.DataUseCase
-import com.gb.vale.androidcoursecompose.usecases.UseUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,8 +18,9 @@ class HomeViewModel @Inject constructor(
 ):BaseViewModel() {
 
 
-    var uiState by mutableStateOf(RecipesUiState())
+    var uiStateListRecipes by mutableStateOf(listOf<RecipeModel>())
 
+    var uiStateLoading by mutableStateOf(true)
     init {
         execute {
             delay(500)
@@ -30,8 +30,10 @@ class HomeViewModel @Inject constructor(
 
     fun loadRecipes() {
         execute {
+            uiStateLoading = true
             val response =  dataUseCase.loadRecipes()
-            uiState = uiState.copy(recipes = response)
+            uiStateListRecipes = response
+            uiStateLoading = false
         }
     }
 
