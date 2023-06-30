@@ -53,7 +53,7 @@ fun ScreenRegister (viewModel: AppViewModel, navController: NavController) {
 
     if (viewModel.uiToastRegister) {
         context.toast("Usuario Registrado")
-        viewModel.uiToast = false
+        viewModel.uiToastRegister = false
     }
 
     Column(
