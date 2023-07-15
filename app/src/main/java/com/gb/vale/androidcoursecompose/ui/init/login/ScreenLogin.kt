@@ -1,11 +1,17 @@
 package com.gb.vale.androidcoursecompose.ui.init.login
 
+import android.app.Activity
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.rememberScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
@@ -15,6 +21,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.colorResource
@@ -33,12 +41,15 @@ import com.gb.vale.androidcoursecompose.ui.home.HomeActivity
 import com.gb.vale.androidcoursecompose.ui.init.InitUiEvent
 import com.gb.vale.androidcoursecompose.ui.init.AppViewModel
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun ScreenLogin(viewModel: AppViewModel, navController: NavController) {
 
     val context = LocalContext.current
+    val activity = (LocalContext.current as? Activity)
 
     var text by remember { mutableStateOf("") }
     var textPass by remember { mutableStateOf("") }
@@ -55,6 +66,7 @@ fun ScreenLogin(viewModel: AppViewModel, navController: NavController) {
                 }
                 is InitUiEvent.NavigateToHome -> {
                     if (event.success)HomeActivity.newInstance(context)
+                    activity?.finish()
                 }
                 else -> {}
             }
@@ -66,13 +78,27 @@ fun ScreenLogin(viewModel: AppViewModel, navController: NavController) {
         viewModel.uiToast = false
     }
 
+    val corountineScope = rememberCoroutineScope()
+    val scrollState = rememberScrollState()
+    var scrollToPosition by remember { mutableStateOf(0f) }
+    var scrollToPositionCurrent by remember { mutableStateOf(0f) }
+
+    if (scrollToPosition == scrollToPositionCurrent){
+        textPass = "bvnmc,mvnbvmc"
+    }else{
+        textPass = ""
+    }
+
+
+
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.verticalScroll(scrollState)
+        .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        OutlinedTextField(
+        OutlinedTextField(modifier = Modifier.padding(top = 200.dp),
             value = text,
             shape = RoundedCornerShape(12.dp),
             onValueChange = { text = it },
@@ -140,12 +166,76 @@ fun ScreenLogin(viewModel: AppViewModel, navController: NavController) {
             border = BorderStroke(1.dp, Color.Black),
             colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.blue)),
             onClick = {
-                viewModel.login(text,textPass)
+                corountineScope.launch {
+                    scrollState.animateScrollTo(scrollToPosition.roundToInt())
+                }
+                //viewModel.login(text,textPass)
             }) {
             Text(text = "Iniciar sesión", color = Color.White)
         }
 
-        Text(modifier = Modifier.padding(top = 32.dp).clickable { viewModel.nextRegister()},
+        Text(modifier = Modifier
+            .padding(top = 32.dp)
+            .clickable { viewModel.nextRegister() },
+            text = "Crear cuenta", color = Color.Blue,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            style = MaterialTheme.typography.body1
+        )
+
+        Text(modifier = Modifier
+            .padding(top = 32.dp)
+            .clickable { viewModel.nextRegister() },
+            text = "Crear cuenta", color = Color.Blue,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            style = MaterialTheme.typography.body1
+        )
+        Text(modifier = Modifier
+            .padding(top = 32.dp)
+            .clickable { viewModel.nextRegister() },
+            text = "Crear cuenta", color = Color.Blue,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            style = MaterialTheme.typography.body1
+        )
+        Text(modifier = Modifier.onGloballyPositioned {
+            scrollToPosition = it.positionInRoot().y
+        }
+            .padding(top = 32.dp)
+            .clickable { viewModel.nextRegister() },
+            text = "Crear cuenta", color = Color.Blue,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            style = MaterialTheme.typography.body1
+        )
+        Text(modifier = Modifier
+            .padding(top = 32.dp)
+            .clickable { viewModel.nextRegister() },
+            text = "Crear cuenta", color = Color.Blue,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            style = MaterialTheme.typography.body1
+        )
+        Text(modifier = Modifier
+            .padding(top = 32.dp)
+            .clickable { viewModel.nextRegister() },
+            text = "Crear cuenta", color = Color.Blue,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            style = MaterialTheme.typography.body1
+        )
+        Text(modifier = Modifier
+            .padding(top = 32.dp)
+            .clickable { viewModel.nextRegister() },
+            text = "Crear cuenta", color = Color.Blue,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            style = MaterialTheme.typography.body1
+        )
+        Text(modifier = Modifier
+            .padding(top = 32.dp)
+            .clickable { viewModel.nextRegister() },
             text = "Crear cuenta", color = Color.Blue,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
