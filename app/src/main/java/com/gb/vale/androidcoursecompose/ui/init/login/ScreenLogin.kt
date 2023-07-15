@@ -1,5 +1,6 @@
 package com.gb.vale.androidcoursecompose.ui.init.login
 
+import android.app.Activity
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -39,6 +40,7 @@ import kotlinx.coroutines.flow.collectLatest
 fun ScreenLogin(viewModel: AppViewModel, navController: NavController) {
 
     val context = LocalContext.current
+    val activity = (LocalContext.current as? Activity)
 
     var text by remember { mutableStateOf("") }
     var textPass by remember { mutableStateOf("") }
@@ -55,6 +57,7 @@ fun ScreenLogin(viewModel: AppViewModel, navController: NavController) {
                 }
                 is InitUiEvent.NavigateToHome -> {
                     if (event.success)HomeActivity.newInstance(context)
+                    activity?.finish()
                 }
                 else -> {}
             }
