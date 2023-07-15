@@ -21,6 +21,7 @@ class HomeViewModel @Inject constructor(
     var uiStateListRecipes by mutableStateOf(listOf<RecipeModel>())
 
     var uiStateLoading by mutableStateOf(true)
+
     init {
         execute {
             delay(500)
