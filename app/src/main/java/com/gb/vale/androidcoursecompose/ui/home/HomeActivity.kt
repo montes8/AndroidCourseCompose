@@ -11,7 +11,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -39,13 +41,33 @@ class HomeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AndroidCourseComposeTheme {
+                val scrollState = rememberScrollState()
                 Box{
-                    Column(modifier = Modifier.padding(top = 20.dp, end = 20.dp,
+                    Column(modifier = Modifier.verticalScroll(scrollState).padding(top = 20.dp, end = 20.dp,
                         start = 20.dp)) {
+
+                        Text(text = "lista de recetas",
+                            style = MaterialTheme.typography.body1)
+
+                        Text(text =  "lista de recetas",
+                            style = MaterialTheme.typography.body1)
+
+                        Text(text =  "lista de recetas",
+                            style = MaterialTheme.typography.body1)
+
+                        Text(text =  "lista de recetas",
+                            style = MaterialTheme.typography.body1)
+                        Text(text =  "lista de recetas",
+                            style = MaterialTheme.typography.body1)
+                        Text(text =  "lista de recetas",
+                            style = MaterialTheme.typography.body1)
+                        Text(text =  "lista de recetas",
+                            style = MaterialTheme.typography.body1)
+
                         if (viewModel.uiStateListRecipes.isNotEmpty()){
                             Column(modifier = Modifier.fillMaxSize()) {
                                 Text(text = "Listado de recetas")
-                                LazyColumn(modifier = Modifier.fillMaxSize()){
+                                LazyColumn(modifier = Modifier.fillMaxWidth().height(400.dp)){
                                     items(viewModel.uiStateListRecipes){recipe ->
                                         RecipesItem(recipe)
                                     }
