@@ -42,8 +42,8 @@ fun ScreenLogin(viewModel: AppViewModel, navController: NavController) {
     val context = LocalContext.current
     val activity = (LocalContext.current as? Activity)
 
-    var text by remember { mutableStateOf("") }
-    var textPass by remember { mutableStateOf("") }
+    var text by remember { mutableStateOf("tayler") }
+    var textPass by remember { mutableStateOf("tayler") }
     var visibility by remember { mutableStateOf(false) }
     var revealPassword by remember { mutableStateOf(false) }
     val keyboardController = LocalSoftwareKeyboardController.current

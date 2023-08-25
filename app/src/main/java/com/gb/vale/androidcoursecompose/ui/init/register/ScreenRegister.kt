@@ -34,8 +34,8 @@ import kotlinx.coroutines.flow.collectLatest
 fun ScreenRegister (viewModel: AppViewModel, navController: NavController) {
 
     val context = LocalContext.current
-    var text by remember { mutableStateOf("") }
-    var textPass by remember { mutableStateOf("") }
+    var text by remember { mutableStateOf("tayler") }
+    var textPass by remember { mutableStateOf("tayler") }
     var visibility by remember { mutableStateOf(false) }
     var revealPassword by remember { mutableStateOf(false) }
     val keyboardController = LocalSoftwareKeyboardController.current
