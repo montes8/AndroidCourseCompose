@@ -74,6 +74,14 @@ class HomeActivity : ComponentActivity() {
                                 }
                             }
                         }
+                        Text(text =  "lista de recetas",
+                            style = MaterialTheme.typography.body1)
+                        Text(text =  "lista de recetas",
+                            style = MaterialTheme.typography.body1)
+                        Text(text =  "lista de recetas",
+                            style = MaterialTheme.typography.body1)
+                        Text(text =  "lista de recetas",
+                            style = MaterialTheme.typography.body1)
                     }
                 }
 

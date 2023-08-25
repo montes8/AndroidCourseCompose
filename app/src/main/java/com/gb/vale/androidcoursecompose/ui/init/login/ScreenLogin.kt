@@ -81,13 +81,6 @@ fun ScreenLogin(viewModel: AppViewModel, navController: NavController) {
     val corountineScope = rememberCoroutineScope()
     val scrollState = rememberScrollState()
     var scrollToPosition by remember { mutableStateOf(0f) }
-    var scrollToPositionCurrent by remember { mutableStateOf(0f) }
-
-    if (scrollToPosition == scrollToPositionCurrent){
-        textPass = "bvnmc,mvnbvmc"
-    }else{
-        textPass = ""
-    }
 
 
 
@@ -166,10 +159,7 @@ fun ScreenLogin(viewModel: AppViewModel, navController: NavController) {
             border = BorderStroke(1.dp, Color.Black),
             colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.blue)),
             onClick = {
-                corountineScope.launch {
-                    scrollState.animateScrollTo(scrollToPosition.roundToInt())
-                }
-                //viewModel.login(text,textPass)
+                viewModel.login(text,textPass)
             }) {
             Text(text = "Iniciar sesión", color = Color.White)
         }
